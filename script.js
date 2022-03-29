@@ -38,8 +38,9 @@ continueBtn.onclick = ()=>{
   quizBox.classList.add( 'visible' ); // show quiz box
   showQuestions( 0 ); // calling showQestions function
   queCounter( 1 ); // passing 1 parameter to queCounter
-  startTimer( 15 ); // calling startTimer function
-  startTimerLine( 0 ); // calling startTimerLine function
+  startGlobalTimer();
+  // startTimer( 15 ); // calling startTimer function
+  // startTimerLine( 0 ); // calling startTimerLine function
 }
 
 let timeValue =  15;
@@ -50,6 +51,7 @@ let userScore = 0;
 let counter;
 let counterLine;
 let widthValue = 0;
+let startTime, endTime;
 
 const quitQuiz = resultBox.querySelector( '.buttons .quit' );
 // const restartQuiz = resultBox.querySelector( '.buttons .restart' );
@@ -90,15 +92,16 @@ nextBtn.onclick = ()=>{
     queNumb++; // increment the queNumb value
     showQuestions( queCount ); // calling showQestions function
     queCounter( queNumb ); // passing queNumb value to queCounter
-    clearInterval( counter ); // clear counter
-    clearInterval( counterLine ); // clear counterLine
-    startTimer( timeValue ); // calling startTimer function
-    startTimerLine( widthValue ); // calling startTimerLine function
-    timeText.textContent = 'Vrijeme'; // change the timeText to Time Left
+    // clearInterval( counter ); // clear counter
+    // clearInterval( counterLine ); // clear counterLine
+    // startTimer( timeValue ); // calling startTimer function
+    // startTimerLine( widthValue ); // calling startTimerLine function
+    // timeText.textContent = 'Vrijeme'; // change the timeText to Time Left
     nextBtn.classList.remove( 'show' ); // hide the next button
   } else {
-    clearInterval( counter ); // clear counter
-    clearInterval( counterLine ); // clear counterLine
+    // clearInterval( counter ); // clear counter
+    // clearInterval( counterLine ); // clear counterLine
+    stopGlobalTimer();
     showResult(); // calling showResult function
   }
 }
@@ -135,6 +138,7 @@ function optionSelected( answer ) {
   let correcAns = questions[ queCount ].answer; // getting correct answer from array
   const allOptions = optionList.children.length; // getting all option items
 
+  answer.classList.add( 'selected' ); // adding green color to correct selected option
   if ( userAns == correcAns ) { // if user selected option is equal to array's correct answer
     userScore += 1; // upgrading score value with 1
     answer.classList.add( 'correct' ); // adding green color to correct selected option
@@ -180,47 +184,62 @@ function showResult() {
   scoreText.innerHTML = scoreTag;
 }
 
-function startTimer( time ) {
-  counter = setInterval( timer, 1000 );
-  function timer() {
-    timeCount.textContent = time; // changing the value of timeCount with time value
-    time--; // decrement the time value
-    if( time < 9 ) { // if timer is less than 9
-      let addZero = timeCount.textContent;
-      timeCount.textContent = '0' + addZero; // add a 0 before time value
-    }
-    if( time < 0 ) { // if timer is less than 0
-      clearInterval( counter ); // clear counter
-      timeText.textContent = 'Vrijeme je isteklo'; // change the time text to time off
-      const allOptions = optionList.children.length; // getting all option items
-      let correcAns = questions[ queCount ].answer; // getting correct answer from array
-      for( i = 0; i < allOptions; i++ ) {
-        if( optionList.children[ i ].textContent == correcAns ) { // if there is an option which is matched to an array answer
-          optionList.children[ i ].setAttribute( 'class', 'option correct' ); // adding green color to matched option
-          // optionList.children[ i ].insertAdjacentHTML( 'beforeend', tickIconTag ); // adding tick icon to matched option
-          // console.log( 'Time Off: Auto selected correct answer.' );
-        }
-      }
-      for( i = 0; i < allOptions; i++ ) {
-        optionList.children[ i ].classList.add( 'disabled' ); // once user select an option then disabled all options
-      }
-      nextBtn.classList.add( 'show' ); // show the next button if user selected any option
-    }
-  }
+function startGlobalTimer() {
+  startTime = new Date();
 }
 
-function startTimerLine( time ) {
-  let counterLineWidth = quizBox.offsetWidth;
-  let counterLineInterval = timeValue * 1000 / counterLineWidth;
-  counterLine = setInterval( timer, counterLineInterval );
-  function timer() {
-    time += 1; // upgrading time value with 1
-    timeLine.style.width = time + "px"; // increasing width of timeLine with px by time value
-    if( time > ( counterLineWidth - 1 ) ) { // if time value is greater than 549
-      clearInterval( counterLine ); // clear counterLine
-    }
-  }
+function stopGlobalTimer() {
+  endTime = new Date();
+  var timeDiff = endTime - startTime; //in ms
+  // strip the ms
+  timeDiff /= 1000;
+
+  // get seconds
+  totalTime = Math.round( timeDiff );
+  // console.log(seconds + " seconds");
 }
+
+// function startTimer( time ) {
+//   counter = setInterval( timer, 1000 );
+//   function timer() {
+//     timeCount.textContent = time; // changing the value of timeCount with time value
+//     time--; // decrement the time value
+//     if( time < 9 ) { // if timer is less than 9
+//       let addZero = timeCount.textContent;
+//       timeCount.textContent = '0' + addZero; // add a 0 before time value
+//     }
+//     if( time < 0 ) { // if timer is less than 0
+//       clearInterval( counter ); // clear counter
+//       timeText.textContent = 'Vrijeme je isteklo'; // change the time text to time off
+//       const allOptions = optionList.children.length; // getting all option items
+//       let correcAns = questions[ queCount ].answer; // getting correct answer from array
+//       for( i = 0; i < allOptions; i++ ) {
+//         if( optionList.children[ i ].textContent == correcAns ) { // if there is an option which is matched to an array answer
+//           optionList.children[ i ].setAttribute( 'class', 'option correct' ); // adding green color to matched option
+//           // optionList.children[ i ].insertAdjacentHTML( 'beforeend', tickIconTag ); // adding tick icon to matched option
+//           // console.log( 'Time Off: Auto selected correct answer.' );
+//         }
+//       }
+//       for( i = 0; i < allOptions; i++ ) {
+//         optionList.children[ i ].classList.add( 'disabled' ); // once user select an option then disabled all options
+//       }
+//       nextBtn.classList.add( 'show' ); // show the next button if user selected any option
+//     }
+//   }
+// }
+
+// function startTimerLine( time ) {
+//   let counterLineWidth = quizBox.offsetWidth;
+//   let counterLineInterval = timeValue * 1000 / counterLineWidth;
+//   counterLine = setInterval( timer, counterLineInterval );
+//   function timer() {
+//     time += 1; // upgrading time value with 1
+//     timeLine.style.width = time + "px"; // increasing width of timeLine with px by time value
+//     if( time > ( counterLineWidth - 1 ) ) { // if time value is greater than 549
+//       clearInterval( counterLine ); // clear counterLine
+//     }
+//   }
+// }
 
 function queCounter( index ) {
   // creating a new span tag and passing the question number and total question
