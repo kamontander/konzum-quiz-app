@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="hr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KONZUM kviz | Dani komunikacija 2022.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- FontAweome CDN link for icons-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+</head>
+
+<body>
+
+  <div class="scene-container">
+    <div id="scene">
+      <div class="layer-0" data-depth="0.1">
+        <div class="graphic"></div>
+      </div>
+      <div class="layer-1" data-depth="0.2">
+        <div class="graphic"></div>
+      </div>
+      <div class="layer-2" data-depth="0.3">
+        <div class="graphic"></div>
+      </div>
+      <div class="layer-3" data-depth="0.5">
+        <div class="graphic"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- start quiz button -->
+  <div class="welcome-screen visible">
+    <img src="images/konzum-logo.svg" class="konzum-logo">
+    <h1>Kviz znanja</h1>
+    <img src="images/jednamanje.svg" class="jednamanje">
+    <p>Testiraj svoje znanje o štetnosti plastike i njenom utjecaju na okoliš i (možda) osvojiš nagradu!</p>
+    <button>Kreni</button>
+    <img src="images/priroda-me-voli.svg" class="priroda-me-voli">
+  </div>
+
+  <!-- info box -->
+  <div class="info-box">
+    <div class="info-title"><span>Pravila kviza</span></div>
+    <ol class="info-list">
+      <li>Na raspolaganju Vam je <span>15 sekundi</span> po svakome pitanju.</li>
+      <li>Nakon što odaberete odgovor, ne možete mijenjati svoj odabir.</li>
+      <li>Ne možete birati odgovor nakon što istekne vrijeme.</li>
+      <li>Boduju se točni odgovori te utrošeno vrijeme.</li>
+    </ol>
+    <div class="buttons">
+      <button class="quit">Izađi</button>
+      <button class="restart">Nastavi</button>
+    </div>
+  </div>
+
+  <!-- quiz box -->
+  <div class="quiz-box">
+    <header>
+      <div class="title">KONZUM kviz</div>
+      <div class="timer">
+        <div class="time-left-txt">Preostalo vrijeme</div>
+        <div class="timer-sec">15</div>
+      </div>
+      <div class="time-line"></div>
+    </header>
+    <section>
+      <div class="que-text">
+        <!-- question -->
+      </div>
+      <div class="option-list">
+        <!-- options -->
+      </div>
+    </section>
+
+    <!-- footer of quiz box -->
+    <footer>
+      <div class="total-que">
+        <!-- question count number -->
+      </div>
+      <button class="next-btn">Naprijed</button>
+    </footer>
+  </div>
+
+  <!-- result box -->
+  <div class="result-box">
+    <img src="images/priroda-me-voli.svg" class="priroda-me-voli">
+    <div class="complete-text">Završili ste kviz!</div>
+    <div class="score-text">
+      <!-- results -->
+    </div>
+    <div class="buttons">
+      <button class="restart">Igraj ponovno</button>
+      <button class="quit">Izađi</button>
+    </div>
+  </div>
+
+  <script src="js/parallax.min.js"></script>
+  <script src="js/questions.js"></script>
+  <script src="js/script.js"></script>
+
+</body>
+</html>
