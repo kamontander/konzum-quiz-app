@@ -51,27 +51,28 @@ let counter;
 let counterLine;
 let widthValue = 0;
 
-const restartQuiz = resultBox.querySelector( '.buttons .restart' );
 const quitQuiz = resultBox.querySelector( '.buttons .quit' );
+// const restartQuiz = resultBox.querySelector( '.buttons .restart' );
 
-// if restartQuiz button clicked
-restartQuiz.onclick = ()=>{
-  quizBox.classList.add( 'visible' ); // show quiz box
-  resultBox.classList.remove( 'visible' ); // hide result box
-  timeValue = 15;
-  queCount = 0;
-  queNumb = 1;
-  userScore = 0;
-  widthValue = 0;
-  showQuestions( queCount ); // calling showQestions function
-  queCounter( queNumb ); // passing queNumb value to queCounter
-  clearInterval( counter ); // clear counter
-  clearInterval( counterLine ); // clear counterLine
-  startTimer( timeValue ); // calling startTimer function
-  startTimerLine( widthValue ); // calling startTimerLine function
-  timeText.textContent = 'Preostalo vrijeme'; // change the text of timeText to Time Left
-  nextBtn.classList.remove( 'show' ); // hide the next button
-}
+// // if restartQuiz button clicked
+// restartQuiz.onclick = ()=>{
+//   quizBox.classList.add( 'visible' ); // show quiz box
+//   resultBox.classList.remove( 'visible' ); // hide result box
+//   timeValue = 15;
+//   totalTime = 0;
+//   queCount = 0;
+//   queNumb = 1;
+//   userScore = 0;
+//   widthValue = 0;
+//   showQuestions( queCount ); // calling showQestions function
+//   queCounter( queNumb ); // passing queNumb value to queCounter
+//   clearInterval( counter ); // clear counter
+//   clearInterval( counterLine ); // clear counterLine
+//   startTimer( timeValue ); // calling startTimer function
+//   startTimerLine( widthValue ); // calling startTimerLine function
+//   timeText.textContent = 'Preostalo vrijeme'; // change the text of timeText to Time Left
+//   nextBtn.classList.remove( 'show' ); // hide the next button
+// }
 
 // if quitQuiz button clicked
 quitQuiz.onclick = ()=>{
@@ -93,7 +94,7 @@ nextBtn.onclick = ()=>{
     clearInterval( counterLine ); // clear counterLine
     startTimer( timeValue ); // calling startTimer function
     startTimerLine( widthValue ); // calling startTimerLine function
-    timeText.textContent = 'Time Left'; // change the timeText to Time Left
+    timeText.textContent = 'Vrijeme'; // change the timeText to Time Left
     nextBtn.classList.remove( 'show' ); // hide the next button
   } else {
     clearInterval( counter ); // clear counter
@@ -107,7 +108,7 @@ function showQuestions( index ) {
   const queText = document.querySelector( '.que-text' );
 
   // creating a new span and div tag for question and option and passing the value using array index
-  let queTag = '<span>'+ questions[ index ].numb + ". " + questions[ index ].question +'</span>';
+  let queTag = '<span>'+ questions[ index ].question +'</span>';
   let optionTag = '';
   for ( let j = 0; j < questions[ index ].options.length; j++ ) {
     optionTag += '<div class="option"><span>'+ questions[ index ].options[ j ] +'</span></div>';
@@ -122,7 +123,7 @@ function showQuestions( index ) {
     option[ i ].setAttribute( 'onclick', 'optionSelected(this)' );
   }
 }
-// creating the new div tags which for icons
+// creating the new div tags for icons
 let tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>';
 let crossIconTag = '<div class="icon cross"><i class="fas fa-times"></i></div>';
 
@@ -137,18 +138,18 @@ function optionSelected( answer ) {
   if ( userAns == correcAns ) { // if user selected option is equal to array's correct answer
     userScore += 1; // upgrading score value with 1
     answer.classList.add( 'correct' ); // adding green color to correct selected option
-    answer.insertAdjacentHTML( 'beforeend', tickIconTag ); // adding tick icon to correct selected option
+    // answer.insertAdjacentHTML( 'beforeend', tickIconTag ); // adding tick icon to correct selected option
     // console.log( 'Correct Answer' );
     // console.log( 'Your correct answer = ' + userScore );
   } else {
     answer.classList.add( 'incorrect' ); // adding red color to correct selected option
-    answer.insertAdjacentHTML( 'beforeend', crossIconTag ); // adding cross icon to correct selected option
+    // answer.insertAdjacentHTML( 'beforeend', crossIconTag ); // adding cross icon to correct selected option
     // console.log( 'Wrong answer' );
 
     for ( i = 0; i < allOptions; i++ ) {
       if( optionList.children[ i ].textContent == correcAns ) { // if there is an option which is matched to an array answer
         optionList.children[ i ].setAttribute( 'class', 'option correct' ); // adding green color to matched option
-        optionList.children[ i ].insertAdjacentHTML( 'beforeend', tickIconTag ); // adding tick icon to matched option
+        // optionList.children[ i ].insertAdjacentHTML( 'beforeend', tickIconTag ); // adding tick icon to matched option
         // console.log( 'Auto selected correct answer.' );
       }
     }
@@ -196,7 +197,7 @@ function startTimer( time ) {
       for( i = 0; i < allOptions; i++ ) {
         if( optionList.children[ i ].textContent == correcAns ) { // if there is an option which is matched to an array answer
           optionList.children[ i ].setAttribute( 'class', 'option correct' ); // adding green color to matched option
-          optionList.children[ i ].insertAdjacentHTML( 'beforeend', tickIconTag ); // adding tick icon to matched option
+          // optionList.children[ i ].insertAdjacentHTML( 'beforeend', tickIconTag ); // adding tick icon to matched option
           // console.log( 'Time Off: Auto selected correct answer.' );
         }
       }
@@ -209,11 +210,13 @@ function startTimer( time ) {
 }
 
 function startTimerLine( time ) {
-  counterLine = setInterval( timer, 29 );
+  let counterLineWidth = quizBox.offsetWidth;
+  let counterLineInterval = timeValue * 1000 / counterLineWidth;
+  counterLine = setInterval( timer, counterLineInterval );
   function timer() {
     time += 1; // upgrading time value with 1
     timeLine.style.width = time + "px"; // increasing width of timeLine with px by time value
-    if( time > 549 ) { // if time value is greater than 549
+    if( time > ( counterLineWidth - 1 ) ) { // if time value is greater than 549
       clearInterval( counterLine ); // clear counterLine
     }
   }
