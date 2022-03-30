@@ -67,7 +67,7 @@ let questions = [
       options: [
         "reciklira se manje od 1% jednokratnih plastičnih vrećica",
         "većina jednokratnih plastičnih vrećica se reciklira",
-        "može i bolje, reciklira se oko 50%  jednokratnih plastičnih vrećica"
+        "reciklira se oko 50%  jednokratnih plastičnih vrećica"
       ]
     },
     {
