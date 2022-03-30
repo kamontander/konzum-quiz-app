@@ -65,14 +65,14 @@ let questions = [
       question: "Kako svijetu ide recikliranje jednokratnih plastičnih vrećica?",
       answer: "sjedi 1, reciklira se manje od 1% jednokratnih plastičnih vrećica",
       options: [
-        "sjedi 1, reciklira se manje od 1% jednokratnih plastičnih vrećica",
-        "ma za 5, većina jednokratnih plastičnih vrećica se reciklira",
+        "reciklira se manje od 1% jednokratnih plastičnih vrećica",
+        "većina jednokratnih plastičnih vrećica se reciklira",
         "može i bolje, reciklira se oko 50%  jednokratnih plastičnih vrećica"
       ]
     },
     {
       numb: 8,
-      question: "Velika pacifička mrlja otpada koji pluta između kalifornije i havaja je površinom veća od hrvatske koliko veća?",
+      question: "Velika pacifička mrlja otpada koji pluta između Kalifornije i Havaja je površinom veća od Hrvatske. Koliko veća?",
       answer: "veličine je oko 1.6 milijuna m², dakle oko 29 puta veća",
       options: [
         "veličine je oko 1.6 milijuna m², dakle oko 29 puta veća",
@@ -82,7 +82,7 @@ let questions = [
     },
     {
       numb: 9,
-      question: "Što svatko od nas sigurno može učiniti za smanjenje količine jednokratne plastike u okolišu?",
+      question: "Što svatko od nas može učiniti za smanjenje količine jednokratne plastike u okolišu?",
       answer: "koristiti višekratne torbe, za početak",
       options: [
         "koristiti višekratne torbe, za početak",
