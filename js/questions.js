@@ -52,7 +52,7 @@ let questions = [
     },
     {
       numb: 6,
-      question: "U prosjeku samo jedna višekratna torba može zamijeniti bar jednokratnih plastičnih vrećica?",
+      question: "U prosjeku, samo jedna višekratna torba može zamijeniti bar koliko jednokratnih plastičnih vrećica?",
       answer: "1000",
       options: [
         "tri",
