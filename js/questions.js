@@ -63,7 +63,7 @@ let questions = [
     {
       numb: 7,
       question: "Kako svijetu ide recikliranje jednokratnih plastičnih vrećica?",
-      answer: "sjedi 1, reciklira se manje od 1% jednokratnih plastičnih vrećica",
+      answer: "reciklira se manje od 1% jednokratnih plastičnih vrećica",
       options: [
         "reciklira se manje od 1% jednokratnih plastičnih vrećica",
         "većina jednokratnih plastičnih vrećica se reciklira",
